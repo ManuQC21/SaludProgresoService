@@ -1,5 +1,7 @@
 package com.upao.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -18,6 +20,7 @@ public class Medico {
     public int getID_Medico() {
         return ID_Medico;
     }
+    @JsonBackReference
     @OneToMany(mappedBy = "medicoAsignado")
     private List<Paciente> pacientes;
 

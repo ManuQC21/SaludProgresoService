@@ -1,5 +1,9 @@
 package com.upao.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -16,6 +20,7 @@ public class Paciente {
     @Column(length = 100)
     private String apellidoMaterno;
     @Column(length = 100)
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date fechanacimiento;
     @Column(length = 20)
     private String tipoDoc;
@@ -34,17 +39,23 @@ public class Paciente {
     @Column(length = 400)
     private String informacionadicional;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "paciente")
     private List<CitasMedicas> citasMedicas;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "paciente")
     private List<Medicamentos> medicamentos;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "paciente")
     private List<RegistroSalud> registrosSalud;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "paciente")
     private List<ControlMedico> controlMedico;
+
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "ID_Medico")
     private Medico medicoAsignado;
