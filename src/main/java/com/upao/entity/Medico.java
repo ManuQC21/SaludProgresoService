@@ -11,7 +11,7 @@ public class Medico {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int ID_Medico;
 
-    @Column(name = "NombreMedico", length = 255, nullable = false)
+    @Column(name = "NombreMedico", length = 500, nullable = false)
     private String NombreMedico;
 
     @Column(name = "Especialidad", length = 255, nullable = false)
@@ -20,9 +20,6 @@ public class Medico {
     public int getID_Medico() {
         return ID_Medico;
     }
-    @JsonBackReference
-    @OneToMany(mappedBy = "medicoAsignado")
-    private List<Paciente> pacientes;
 
     public void setID_Medico(int ID_Medico) {
         this.ID_Medico = ID_Medico;
@@ -42,13 +39,5 @@ public class Medico {
 
     public void setEspecialidad(String especialidad) {
         Especialidad = especialidad;
-    }
-
-    public List<Paciente> getPacientes() {
-        return pacientes;
-    }
-
-    public void setPacientes(List<Paciente> pacientes) {
-        this.pacientes = pacientes;
     }
 }

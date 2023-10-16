@@ -22,6 +22,9 @@ public class CitasMedicas {
 
     @Column(name = "Comentarios", length = 1000)
     private String Comentarios;
+    @OneToOne
+    @JoinColumn(name = "ID_Medico")
+    private Medico medico;
 
     public int getId() {
         return id;
@@ -63,5 +66,11 @@ public class CitasMedicas {
         Comentarios = comentarios;
     }
 
+    public Medico getMedico() {
+        return medico;
+    }
 
+    public void setMedico(Medico medico) {
+        this.medico = medico;
+    }
 }

@@ -1,7 +1,10 @@
 package com.upao.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class RecetaMedica {
@@ -16,13 +19,8 @@ public class RecetaMedica {
     @ManyToOne
     @JoinColumn(name = "ID_Medico")
     private Medico medico;
-
-    @ManyToOne
-    @JoinColumn(name = "ID_Medicamento")
-    private Medicamentos medicamentos;
-
-    @Column(name = "FechaReceta")
-    @Temporal(TemporalType.TIMESTAMP)
+    @Column
+    @JsonFormat(pattern = "dd-MM-yyyy", timezone = "America/Lima")
     private Date FechaReceta;
 
     public int getID_Receta() {
@@ -47,14 +45,6 @@ public class RecetaMedica {
 
     public void setMedico(Medico medico) {
         this.medico = medico;
-    }
-
-    public Medicamentos getMedicamentos() {
-        return medicamentos;
-    }
-
-    public void setMedicamentos(Medicamentos medicamentos) {
-        this.medicamentos = medicamentos;
     }
 
     public Date getFechaReceta() {
