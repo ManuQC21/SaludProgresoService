@@ -38,28 +38,6 @@ public class Paciente {
     private String alergias;
     @Column(length = 400)
     private String informacionadicional;
-
-    @JsonManagedReference
-    @OneToMany(mappedBy = "paciente")
-    private List<CitasMedicas> citasMedicas;
-
-    @JsonManagedReference
-    @OneToMany(mappedBy = "paciente")
-    private List<Medicamentos> medicamentos;
-
-    @JsonManagedReference
-    @OneToMany(mappedBy = "paciente")
-    private List<RegistroSalud> registrosSalud;
-
-    @JsonManagedReference
-    @OneToMany(mappedBy = "paciente")
-    private List<ControlMedico> controlMedico;
-
-    @JsonBackReference
-    @ManyToOne
-    @JoinColumn(name = "ID_Medico")
-    private Medico medicoAsignado;
-
     @OneToOne
     private DocumentoAlmacenado foto;
 
@@ -174,45 +152,5 @@ public class Paciente {
     public void setFoto(DocumentoAlmacenado foto) {
         this.foto = foto;
     }
-
-    public List<CitasMedicas> getCitasMedicas() {
-        return citasMedicas;
-    }
-
-    public void setCitasMedicas(List<CitasMedicas> citasMedicas) {
-        this.citasMedicas = citasMedicas;
-    }
-
-    public List<Medicamentos> getMedicamentos() {
-        return medicamentos;
-    }
-
-    public void setMedicamentos(List<Medicamentos> medicamentos) {
-        this.medicamentos = medicamentos;
-    }
-
-    public List<RegistroSalud> getRegistrosSalud() {
-        return registrosSalud;
-    }
-
-    public void setRegistrosSalud(List<RegistroSalud> registrosSalud) {
-        this.registrosSalud = registrosSalud;
-    }
-
-    public List<ControlMedico> getControlMedico() {
-        return controlMedico;
-    }
-
-    public void setControlMedico(List<ControlMedico> controlMedico) {
-        this.controlMedico = controlMedico;
-    }
-
-    public Medico getMedicoAsignado() {
-        return medicoAsignado;
-    }
-
-    public void setMedicoAsignado(Medico medicoAsignado) {
-        this.medicoAsignado = medicoAsignado;
-    }
-
+    
 }
