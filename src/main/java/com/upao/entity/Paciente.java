@@ -11,7 +11,7 @@ public class Paciente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(length = 100)
-    private String nombre;
+    private String nombres;
     @Column(length = 100)
     private String apellidoPaterno;
     @Column(length = 100)
@@ -50,12 +50,12 @@ public class Paciente {
         this.id = ID_Paciente;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getNombres() {
+        return nombres;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setNombres(String nombre) {
+        this.nombres = nombre;
     }
 
     public String getApellidoPaterno() {
