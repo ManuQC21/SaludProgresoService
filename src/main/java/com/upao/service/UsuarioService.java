@@ -41,38 +41,4 @@ public class UsuarioService {
         }
     }
 
-
-    // Método para editar información del usuario
-    public GenericResponse<Usuario> editarUsuario(Usuario u, String nuevoNombre, String nuevoGenero, String nuevaDireccion, String nuevoDistrito, String nuevoTelefono, String nuevasAlergias, String nuevaInformacionAdicional) {
-        Optional<Usuario> optU = this.repository.findById(u.getId());
-
-        if (optU.isPresent()) {
-            Usuario usuarioExistente = optU.get();
-
-            // Verifica si el usuario tiene un paciente relacionado
-            if (usuarioExistente.getPaciente() != null) {
-                Paciente paciente = usuarioExistente.getPaciente();
-
-                // Actualiza los campos del paciente
-                paciente.setNombre(nuevoNombre);
-                paciente.setGenero(nuevoGenero);
-                paciente.setDireccion(nuevaDireccion);
-                paciente.setDistrito(nuevoDistrito);
-                paciente.setTelefono(nuevoTelefono);
-                paciente.setAlergias(nuevasAlergias);
-                paciente.setInformacionadicional(nuevaInformacionAdicional);
-
-                // Guarda el paciente actualizado en la base de datos
-                this.pacienteRepository.save(paciente);
-            }
-
-            // Guarda el usuario actualizado en la base de datos
-            Usuario usuarioActualizado = this.repository.save(usuarioExistente);
-
-            return new GenericResponse<>(TIPO_DATA, RPTA_OK, "Usuario actualizado correctamente", usuarioActualizado);
-        } else {
-            // El usuario no existe
-            return new GenericResponse<>(TIPO_DATA, RPTA_WARNING, "El usuario no existe", null);
-        }
-    }
 }
