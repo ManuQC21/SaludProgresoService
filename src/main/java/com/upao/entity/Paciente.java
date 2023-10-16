@@ -27,11 +27,15 @@ public class Paciente {
     @Column(length = 8)
     private String numDoc;
     @Column(length = 100)
-    private String genero;
+    private String departamento;
+    @Column(length = 100)
+    private String provincia;
     @Column(length = 100)
     private String distrito;
     @Column(length = 100)
     private String direccion;
+    @Column(length = 100)
+    private String genero;
     @Column(length = 9)
     private String telefono;
     @Column(length = 100)
@@ -121,6 +125,22 @@ public class Paciente {
         this.direccion = direccion;
     }
 
+    public String getDepartamento() {
+        return departamento;
+    }
+
+    public void setDepartamento(String departamento) {
+        this.departamento = departamento;
+    }
+
+    public String getProvincia() {
+        return provincia;
+    }
+
+    public void setProvincia(String provincia) {
+        this.provincia = provincia;
+    }
+
     public String getTelefono() {
         return telefono;
     }
@@ -152,5 +172,5 @@ public class Paciente {
     public void setFoto(DocumentoAlmacenado foto) {
         this.foto = foto;
     }
-    
+
 }
