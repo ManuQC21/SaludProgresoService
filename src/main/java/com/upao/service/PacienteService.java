@@ -19,8 +19,8 @@ public class PacienteService {
 
     //Método para guardar y actualizar paciente
     public GenericResponse save(Paciente c){
-        Optional<Paciente> opt = this.repository.findById(c.getID_Paciente());
-        int idf = opt.isPresent() ? opt.get().getID_Paciente() : 0;
+        Optional<Paciente> opt = this.repository.findById(c.getId());
+        int idf = opt.isPresent() ? opt.get().getId() : 0;
         if(idf == 0){
             if(repository.existByDoc(c.getNumDoc().trim()) == 1){
                 return new GenericResponse(TIPO_RESULT, RPTA_WARNING, "Lo sentimos: " +
@@ -28,17 +28,17 @@ public class PacienteService {
                         "y si el problema persiste comuniquese con el soporte técnico", null);
             }else{
                 //Guarda
-                c.setID_Paciente(idf);
+                c.setId(idf);
                 return new GenericResponse(TIPO_DATA, RPTA_OK, "Paciente registrado correctamente", this.repository.save(c));
             }
         }else{
             //Actualizar Registro
-            if(repository.existByDocForUpdate(c.getNumDoc().trim(), c.getID_Paciente()) == 1){
+            if(repository.existByDocForUpdate(c.getNumDoc().trim(), c.getId()) == 1){
                 return new GenericResponse(TIPO_RESULT, RPTA_WARNING, "Error: Ya existe un Paciente con esos mismos datos - " +
                         "verifique e intente de nuevo", null);
             }else{
                 //Actualiza
-                c.setID_Paciente(idf);
+                c.setId(idf);
                 return new GenericResponse(TIPO_DATA, RPTA_OK, "Datos del Paciente actualizado", this.repository.save(c));
             }
         }

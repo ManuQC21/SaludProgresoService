@@ -4,13 +4,12 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
 @Entity
 public class RecetaMedica {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int ID_Receta;
+    private int id;
 
     @ManyToOne
     @JoinColumn(name = "ID_Paciente")
@@ -23,12 +22,12 @@ public class RecetaMedica {
     @JsonFormat(pattern = "dd-MM-yyyy", timezone = "America/Lima")
     private Date FechaReceta;
 
-    public int getID_Receta() {
-        return ID_Receta;
+    public int getId() {
+        return id;
     }
 
-    public void setID_Receta(int ID_Receta) {
-        this.ID_Receta = ID_Receta;
+    public void setId(int ID_Receta) {
+        this.id = ID_Receta;
     }
 
     public Paciente getPaciente() {

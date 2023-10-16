@@ -22,7 +22,7 @@ public class PacienteController {
 
     @PutMapping("/{id}")
     public GenericResponse update(@PathVariable int id, @Valid @RequestBody Paciente c){
-        c.setID_Paciente(id);
+        c.setId(id);
         return this.service.save(c);
     }
 }

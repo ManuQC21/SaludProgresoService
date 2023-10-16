@@ -1,18 +1,15 @@
 package com.upao.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
 @Entity
 public class Paciente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int ID_Paciente;
+    private int id;
     @Column(length = 100)
     private String nombre;
     @Column(length = 100)
@@ -45,12 +42,12 @@ public class Paciente {
     @OneToOne
     private DocumentoAlmacenado foto;
 
-    public int getID_Paciente() {
-        return ID_Paciente;
+    public int getId() {
+        return id;
     }
 
-    public void setID_Paciente(int ID_Paciente) {
-        this.ID_Paciente = ID_Paciente;
+    public void setId(int ID_Paciente) {
+        this.id = ID_Paciente;
     }
 
     public String getNombre() {

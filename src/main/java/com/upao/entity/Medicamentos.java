@@ -7,7 +7,7 @@ import java.util.Date;
 public class Medicamentos {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int ID_Medicamento;
+    private int id;
     @ManyToOne
     @JoinColumn(name = "ID_Paciente")
     private Paciente paciente;
@@ -24,12 +24,12 @@ public class Medicamentos {
     @Column(name = "RecordatorioMedicacion")
     private boolean RecordatorioMedicacion;
 
-    public int getID_Medicamento() {
-        return ID_Medicamento;
+    public int getId() {
+        return id;
     }
 
-    public void setID_Medicamento(int ID_Medicamento) {
-        this.ID_Medicamento = ID_Medicamento;
+    public void setId(int ID_Medicamento) {
+        this.id = ID_Medicamento;
     }
 
     public Paciente getPaciente() {

@@ -1,15 +1,12 @@
 package com.upao.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 public class Medico {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int ID_Medico;
+    private int id;
 
     @Column(name = "NombreMedico", length = 500, nullable = false)
     private String NombreMedico;
@@ -17,12 +14,12 @@ public class Medico {
     @Column(name = "Especialidad", length = 255, nullable = false)
     private String Especialidad;
 
-    public int getID_Medico() {
-        return ID_Medico;
+    public int getId() {
+        return id;
     }
 
-    public void setID_Medico(int ID_Medico) {
-        this.ID_Medico = ID_Medico;
+    public void setId(int ID_Medico) {
+        this.id = ID_Medico;
     }
 
     public String getNombreMedico() {

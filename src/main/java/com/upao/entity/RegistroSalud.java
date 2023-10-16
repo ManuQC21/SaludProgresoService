@@ -8,7 +8,7 @@ import java.util.Date;
 public class RegistroSalud {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int ID_Registro;
+    private int id;
 
     @ManyToOne
     @JoinColumn(name = "ID_Paciente")
@@ -27,12 +27,12 @@ public class RegistroSalud {
     @Column(name = "NivelGlucosa", precision = 5, scale = 2)
     private BigDecimal nivelGlucosa;
 
-    public int getID_Registro() {
-        return ID_Registro;
+    public int getId() {
+        return id;
     }
 
-    public void setID_Registro(int ID_Registro) {
-        this.ID_Registro = ID_Registro;
+    public void setId(int ID_Registro) {
+        this.id = ID_Registro;
     }
 
     public Paciente getPaciente() {
