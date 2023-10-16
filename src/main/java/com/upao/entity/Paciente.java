@@ -17,6 +17,7 @@ public class Paciente {
     @Column(length = 100)
     private String apellidoMaterno;
     @Column(length = 100)
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date fechanacimiento;
     @Column(length = 20)
     private String tipoDoc;
