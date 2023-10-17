@@ -3,7 +3,7 @@ package com.upao.entity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Entity
 public class Paciente {
@@ -18,7 +18,7 @@ public class Paciente {
     private String apellidoMaterno;
     @Column(length = 100)
     @JsonFormat(pattern = "yyyy-MM-dd")
-    private Date fechanacimiento;
+    private LocalDateTime fechanacimiento;
     @Column(length = 20)
     private String tipoDoc;
     @Column(length = 8)
@@ -74,11 +74,11 @@ public class Paciente {
         this.apellidoMaterno = apellidoMaterno;
     }
 
-    public Date getFechanacimiento() {
+    public LocalDateTime getFechanacimiento() {
         return fechanacimiento;
     }
 
-    public void setFechanacimiento(Date fechanacimiento) {
+    public void setFechanacimiento(LocalDateTime fechanacimiento) {
         this.fechanacimiento = fechanacimiento;
     }
 
