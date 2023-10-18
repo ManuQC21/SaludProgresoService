@@ -25,6 +25,8 @@ public class CitasMedicas {
     @OneToOne
     @JoinColumn(name = "ID_Medico")
     private Medico medico;
+    @Column(name = "RecordatorioCita")
+    private boolean RecordatorioCita;
 
     public int getId() {
         return id;
@@ -72,5 +74,13 @@ public class CitasMedicas {
 
     public void setMedico(Medico medico) {
         this.medico = medico;
+    }
+
+    public boolean isRecordatorioCita() {
+        return RecordatorioCita;
+    }
+
+    public void setRecordatorioCita(boolean recordatorioCita) {
+        RecordatorioCita = recordatorioCita;
     }
 }
