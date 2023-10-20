@@ -1,10 +1,9 @@
 package com.upao.entity;
 
-import org.apache.tomcat.jni.Local;
-
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Entity
 public class CitasMedicas {
@@ -17,8 +16,10 @@ public class CitasMedicas {
     @JoinColumn(name = "paciente_id")
     private Paciente paciente;
 
-    private LocalDateTime fechaHoraCita;
 
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime fechaHoraCita;
     @Column(length = 255)
     private String areaEspecialidad;
 
