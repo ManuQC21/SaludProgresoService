@@ -9,14 +9,15 @@ import java.util.Date;
 public class RecetaMedica {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(insertable = false, updatable = false)
     private int id;
 
     @ManyToOne
-    @JoinColumn(name = "ID_Paciente")
+    @JoinColumn(name = "paciente_id")
     private Paciente paciente;
 
     @ManyToOne
-    @JoinColumn(name = "ID_Medico")
+    @JoinColumn(name = "medico_id")
     private Medico medico;
     @Column
     @JsonFormat(pattern = "dd-MM-yyyy", timezone = "America/Lima")

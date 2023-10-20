@@ -8,23 +8,23 @@ import java.util.Date;
 public class RegistroSalud {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(insertable = false, updatable = false)
     private int id;
 
     @ManyToOne
-    @JoinColumn(name = "ID_Paciente")
+    @JoinColumn(name = "paciente_id")
     private Paciente paciente;
 
-    @Column(name = "FechaRegistro")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaRegistro;
 
-    @Column(name = "Peso", precision = 5, scale = 2)
+    @Column(precision = 5, scale = 2)
     private BigDecimal peso;
 
-    @Column(name = "PresionArterial", length = 15)
+    @Column(length = 15)
     private String presionArterial;
 
-    @Column(name = "NivelGlucosa", precision = 5, scale = 2)
+    @Column(precision = 5, scale = 2)
     private BigDecimal nivelGlucosa;
 
     public int getId() {

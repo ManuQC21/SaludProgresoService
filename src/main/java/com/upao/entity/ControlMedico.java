@@ -7,25 +7,25 @@ import java.util.Date;
 public class ControlMedico {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(insertable = false, updatable = false)
     private int id;
 
     @ManyToOne
-    @JoinColumn(name = "ID_Paciente")
+    @JoinColumn(name = "paciente_id")
     private Paciente paciente;
 
     @ManyToOne
-    @JoinColumn(name = "ID_Medico")
+    @JoinColumn(name = "medico_id")
     private Medico medico;
 
     @Column(name = "FechaControl")
     @Temporal(TemporalType.TIMESTAMP)
     private Date FechaControl;
 
-    @Column(name = "Resultados", length = 1000)
+    @Column(length = 1000)
     private String Resultados;
 
     @Lob
-    @Column(name = "Documentos")
     private byte[] Documentos;
 
     public int getId() {

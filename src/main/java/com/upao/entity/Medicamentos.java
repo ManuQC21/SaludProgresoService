@@ -7,29 +7,30 @@ import java.util.Date;
 public class Medicamentos {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(insertable = false, updatable = false)
     private int id;
     @ManyToOne
-    @JoinColumn(name = "ID_Paciente")
+    @JoinColumn(name = "paciente_id")
     private Paciente paciente;
-    @Column(name = "NombreMedicamento", length = 255, nullable = false)
+    @Column(length = 255, nullable = false)
     private String NombreMedicamento;
-    @Column(name = "FechaInicio")
+
     @Temporal(TemporalType.DATE)
     private Date FechaInicio;
-    @Column(name = "FechaFinalizacion")
     @Temporal(TemporalType.DATE)
     private Date FechaFinalizacion;
-    @Column(name = "IndicacionesMedicas", length = 1000)
+    @Column( length = 1000)
     private String IndicacionesMedicas;
-    @Column(name = "RecordatorioMedicacion")
+
     private boolean RecordatorioMedicacion;
+
 
     public int getId() {
         return id;
     }
 
-    public void setId(int ID_Medicamento) {
-        this.id = ID_Medicamento;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public Paciente getPaciente() {
@@ -79,6 +80,4 @@ public class Medicamentos {
     public void setRecordatorioMedicacion(boolean recordatorioMedicacion) {
         RecordatorioMedicacion = recordatorioMedicacion;
     }
-
-
 }

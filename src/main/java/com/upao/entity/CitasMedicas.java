@@ -7,26 +7,26 @@ import java.util.Date;
 public class CitasMedicas {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(insertable = false, updatable = false)
     private int id;
 
     @ManyToOne
-    @JoinColumn(name = "ID_Paciente")
+    @JoinColumn(name = "paciente_id")
     private Paciente paciente;
 
-    @Column(name = "FechaHoraCita")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date FechaHoraCita;
+    private Date fechaHoraCita;
 
-    @Column(name = "AreaEspecialidad", length = 255)
-    private String AreaEspecialidad;
+    @Column(length = 255)
+    private String areaEspecialidad;
 
-    @Column(name = "Comentarios", length = 1000)
-    private String Comentarios;
+    @Column(length = 1000)
+    private String comentarios;
     @OneToOne
-    @JoinColumn(name = "ID_Medico")
+    @JoinColumn(name = "medico_id")
     private Medico medico;
-    @Column(name = "RecordatorioCita")
-    private boolean RecordatorioCita;
+
+    private boolean recordatorioCita;
 
     public int getId() {
         return id;
@@ -45,27 +45,27 @@ public class CitasMedicas {
     }
 
     public Date getFechaHoraCita() {
-        return FechaHoraCita;
+        return fechaHoraCita;
     }
 
     public void setFechaHoraCita(Date fechaHoraCita) {
-        FechaHoraCita = fechaHoraCita;
+        this.fechaHoraCita = fechaHoraCita;
     }
 
     public String getAreaEspecialidad() {
-        return AreaEspecialidad;
+        return areaEspecialidad;
     }
 
     public void setAreaEspecialidad(String areaEspecialidad) {
-        AreaEspecialidad = areaEspecialidad;
+        this.areaEspecialidad = areaEspecialidad;
     }
 
     public String getComentarios() {
-        return Comentarios;
+        return comentarios;
     }
 
     public void setComentarios(String comentarios) {
-        Comentarios = comentarios;
+        this.comentarios = comentarios;
     }
 
     public Medico getMedico() {
@@ -77,10 +77,12 @@ public class CitasMedicas {
     }
 
     public boolean isRecordatorioCita() {
-        return RecordatorioCita;
+        return recordatorioCita;
     }
 
     public void setRecordatorioCita(boolean recordatorioCita) {
-        RecordatorioCita = recordatorioCita;
+        this.recordatorioCita = recordatorioCita;
     }
+
+
 }
