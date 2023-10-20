@@ -14,6 +14,8 @@ public class Medico {
 
     @Column(length = 255, nullable = false)
     private String Especialidad;
+    @OneToOne
+    private DocumentoAlmacenado foto;
 
     public int getId() {
         return id;
@@ -37,5 +39,13 @@ public class Medico {
 
     public void setEspecialidad(String especialidad) {
         Especialidad = especialidad;
+    }
+
+    public DocumentoAlmacenado getFoto() {
+        return foto;
+    }
+
+    public void setFoto(DocumentoAlmacenado foto) {
+        this.foto = foto;
     }
 }

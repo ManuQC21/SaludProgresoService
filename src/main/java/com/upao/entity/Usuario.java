@@ -15,6 +15,11 @@ public class Usuario {
     private boolean vigencia;
     @OneToOne
     private Paciente paciente;
+    @OneToOne
+    private Medico medico;
+
+    @Enumerated(EnumType.STRING)
+    private RolUsuario rol;
 
     public int getId() {
         return id;
@@ -56,5 +61,19 @@ public class Usuario {
         this.paciente = paciente;
     }
 
+    public RolUsuario getRol() {
+        return rol;
+    }
 
+    public void setRol(RolUsuario rol) {
+        this.rol = rol;
+    }
+
+    public Medico getMedico() {
+        return medico;
+    }
+
+    public void setMedico(Medico medico) {
+        this.medico = medico;
+    }
 }
