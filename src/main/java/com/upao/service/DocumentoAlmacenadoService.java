@@ -15,8 +15,6 @@ import java.io.IOException;
 import java.util.HashMap;
 
 import static com.upao.utils.Global.*;
-
-
 @Service
 @Transactional
 public class DocumentoAlmacenadoService {

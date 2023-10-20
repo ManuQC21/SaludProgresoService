@@ -6,12 +6,13 @@ import javax.persistence.*;
 public class Medico {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(insertable = false, updatable = false)
     private int id;
 
-    @Column(name = "NombreMedico", length = 500, nullable = false)
+    @Column(length = 500, nullable = false)
     private String NombreMedico;
 
-    @Column(name = "Especialidad", length = 255, nullable = false)
+    @Column(length = 255, nullable = false)
     private String Especialidad;
 
     public int getId() {
