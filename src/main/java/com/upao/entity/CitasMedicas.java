@@ -19,7 +19,6 @@ public class CitasMedicas {
 
     private LocalDateTime fechaHoraCita;
 
-
     @Column(length = 255)
     private String areaEspecialidad;
 
@@ -85,6 +84,4 @@ public class CitasMedicas {
     public void setRecordatorioCita(boolean recordatorioCita) {
         this.recordatorioCita = recordatorioCita;
     }
-
-
 }
