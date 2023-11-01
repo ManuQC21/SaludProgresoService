@@ -25,4 +25,9 @@ public class CitasMedicasController {
     public GenericResponse list() {
         return citasMedicasService.list();
     }
+
+    @PutMapping("/{id}")
+    public GenericResponse<CitasMedicas> actualizarCita(@PathVariable int id, @RequestBody CitasMedicas citasMedicas) {
+        return citasMedicasService.actualizarCita(id, citasMedicas);
+    }
 }
