@@ -6,14 +6,13 @@ import javax.persistence.*;
 public class Medico {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(insertable = false, updatable = false)
     private int id;
 
-    @Column(length = 500, nullable = false)
-    private String NombreMedico;
+    @Column(length = 500)
+    private String nombreMedico;
 
-    @Column(length = 255, nullable = false)
-    private String Especialidad;
+    @Column(length = 100)
+    private String especialidad;
     @OneToOne
     private DocumentoAlmacenado foto;
 
@@ -21,24 +20,24 @@ public class Medico {
         return id;
     }
 
-    public void setId(int ID_Medico) {
-        this.id = ID_Medico;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNombreMedico() {
-        return NombreMedico;
+        return nombreMedico;
     }
 
     public void setNombreMedico(String nombreMedico) {
-        NombreMedico = nombreMedico;
+        this.nombreMedico = nombreMedico;
     }
 
     public String getEspecialidad() {
-        return Especialidad;
+        return especialidad;
     }
 
     public void setEspecialidad(String especialidad) {
-        Especialidad = especialidad;
+        this.especialidad = especialidad;
     }
 
     public DocumentoAlmacenado getFoto() {

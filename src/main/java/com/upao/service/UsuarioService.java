@@ -1,5 +1,6 @@
 package com.upao.service;
 
+import com.upao.entity.DocumentoAlmacenado;
 import com.upao.entity.Paciente;
 import com.upao.entity.Usuario;
 import com.upao.repository.PacienteRepository;
@@ -40,5 +41,7 @@ public class UsuarioService {
             return new GenericResponse(TIPO_DATA, RPTA_OK, "Datos del usuario actualizados", this.repository.save(u));
         }
     }
-
+    public GenericResponse<Iterable<Usuario>> listar() {
+        return new GenericResponse<Iterable<Usuario>>(TIPO_RESULT, RPTA_OK, OPERACION_CORRECTA, repository.list());
+    }
 }

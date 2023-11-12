@@ -6,6 +6,7 @@ import com.upao.utils.GenericResponse;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("api/usuario")
@@ -22,11 +23,15 @@ public class UsuarioController {
         return this.service.login(email, contrasenia);
     }
     @PostMapping
-    public GenericResponse save(@RequestBody Usuario u){
+    public GenericResponse save(@Valid @RequestBody Usuario u){
         return this.service.guardarUsuario(u);
     }
     @PutMapping("/{id}")
     public GenericResponse update(@PathVariable int id, @RequestBody Usuario u){
         return this.service.guardarUsuario(u);
+    }
+    @GetMapping
+    public GenericResponse list() {
+        return service.listar();
     }
 }

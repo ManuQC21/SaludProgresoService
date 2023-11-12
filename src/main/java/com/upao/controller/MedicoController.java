@@ -17,12 +17,14 @@ public class MedicoController {
     public MedicoController(MedicoService service) {
         this.service = service;
     }
-
-    @PostMapping
+    @PostMapping("/guardar")
     public GenericResponse saveMedico(@Valid @RequestBody Usuario usuario) {
         return this.service.save(usuario);
     }
-
+    @PostMapping
+    public GenericResponse guardarMedico(@Valid @RequestBody Medico medico) {
+        return this.service.guardarMedico(medico);
+    }
     @PutMapping("/{id}")
     public GenericResponse updateMedico(@PathVariable int id, @RequestBody Medico medico) {
         medico.setId(id);

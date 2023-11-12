@@ -21,21 +21,20 @@ public class MedicoService {
         this.medicoRepository = medicoRepository;
         this.usuarioRepository = usuarioRepository;
     }
-
     public GenericResponse save(Usuario medico) {
         if (!isValidMedico(medico)) {
             return new GenericResponse(TIPO_RESULT, RPTA_WARNING, "El usuario no cumple los requisitos para ser médico.", null);
         }
-
         if (usuarioRepository.existsByEmail(medico.getEmail())) {
             return new GenericResponse(TIPO_RESULT, RPTA_WARNING, "Ya existe un médico con este correo electrónico.", null);
         }
-
         return new GenericResponse(TIPO_DATA, RPTA_OK, "Médico registrado correctamente", usuarioRepository.save(medico));
     }
-
     private boolean isValidMedico(Usuario medico) {
         return medico.getEmail().toLowerCase().endsWith("@saludprogreso.com") && medico.getClave().matches("\\d+");
+    }
+    public GenericResponse guardarMedico(Medico medico) {
+        return new GenericResponse(TIPO_DATA, RPTA_OK, "Usuario Registrado Correctamente", this.medicoRepository.save(medico));
     }
 
     public GenericResponse updateMedico(int id, Medico medicoData) {
