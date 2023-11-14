@@ -14,9 +14,8 @@ public class FechasCitas {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "fecha")
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    private LocalDate fecha;    // Fecha de la cita
+    @Column(name = "fecha",length = 100)
+    private String fecha;    // Fecha de la cita
 
     @OneToMany(mappedBy = "fechaCita", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
@@ -25,7 +24,7 @@ public class FechasCitas {
     public FechasCitas() {
     }
 
-    public FechasCitas(LocalDate fecha, List<HorasCitas> horasCitas) {
+    public FechasCitas(String fecha, List<HorasCitas> horasCitas) {
         this.fecha = fecha;
         this.horasCitas = horasCitas;
     }
@@ -38,11 +37,11 @@ public class FechasCitas {
         this.id = id;
     }
 
-    public LocalDate getFecha() {
+    public String getFecha() {
         return fecha;
     }
 
-    public void setFecha(LocalDate fecha) {
+    public void setFecha(String fecha) {
         this.fecha = fecha;
     }
 

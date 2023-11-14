@@ -6,13 +6,8 @@ import com.upao.utils.GenericResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
-
 @Service
 public class CitasService {
 
@@ -55,7 +50,7 @@ public class CitasService {
 
     // 3. Aplazar Cita
     @Transactional
-    public GenericResponse<Citas> aplazarCita(Long citaId, LocalDate nuevaFecha, String nuevaHora) {
+    public GenericResponse<Citas> aplazarCita(Long citaId, String nuevaFecha, String nuevaHora) {
         // Buscar la cita existente
         Optional<Citas> citaExistente = citasRepository.findById(citaId);
         if (!citaExistente.isPresent()) {
@@ -120,7 +115,7 @@ public class CitasService {
 
 
     // 5. Buscar Horas Disponibles en una Fecha
-    public GenericResponse<List<HorasCitas>> buscarHorasDisponibles(LocalDate fecha) {
+    public GenericResponse<List<HorasCitas>> buscarHorasDisponibles(String fecha) {
         //Lógica para buscar horas disponibles en una fecha específica
         List<HorasCitas> horasDisponibles = horasCitasRepository.findHorasDisponiblesEnFecha(fecha);
         // Imprime las Horas disponibles de la fecha
@@ -129,12 +124,9 @@ public class CitasService {
 
     // 6. Buscar Fechas Disponibles
     public GenericResponse<List<String>> buscarFechasDisponibles() {
-        List<LocalDate> fechasDisponibles = fechasCitaRepository.findFechasDisponibles();
-        List<String> fechasFormateadas = fechasDisponibles.stream()
-                .map(fecha -> fecha.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")))
-                .collect(Collectors.toList());
-        // Imprime las fechas de citas para su disponibilidad.
-        return new GenericResponse<>("List<String>", 1, "Fechas disponibles encontradas", fechasFormateadas);
+        // Este método no necesita cambios si findFechasDisponibles ya devuelve una List<String>
+        List<String> fechasDisponibles = fechasCitaRepository.findFechasDisponibles();
+        return new GenericResponse<>("List<String>", 1, "Fechas disponibles encontradas", fechasDisponibles);
     }
     // 7. Buscar Todas las citas
     public GenericResponse<List<Citas>> listarTodasLasCitas() {
@@ -142,5 +134,8 @@ public class CitasService {
         //Imprime todas las citas que hay en la base de datos.
         return new GenericResponse<>("List<Citas>", 1, "Todas las citas encontradas", todasLasCitas);
     }
-
+    public GenericResponse<List<Citas>> obtenerCitasPorFechaYEspecialidad(String fecha, String especialidad) {
+        List<Citas> citas = citasRepository.findByFechaAndEspecialidad(fecha, especialidad);
+        return new GenericResponse<>("List<Citas>", 1, "Citas encontradas", citas);
+    }
 }

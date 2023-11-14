@@ -8,8 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @RestController
@@ -35,8 +33,7 @@ public class CitasController {
     public ResponseEntity<GenericResponse<Citas>> aplazarCita(@PathVariable Long citaId,
                                                               @RequestParam String nuevaFecha,
                                                               @RequestParam String nuevaHora) {
-        LocalDate fecha = LocalDate.parse(nuevaFecha, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        GenericResponse<Citas> response = citasService.aplazarCita(citaId, fecha, nuevaHora);
+        GenericResponse<Citas> response = citasService.aplazarCita(citaId, nuevaFecha, nuevaHora);
         return ResponseEntity.ok(response);
     }
 
@@ -48,8 +45,7 @@ public class CitasController {
 
     @GetMapping("/horasDisponibles")
     public ResponseEntity<GenericResponse<List<HorasCitas>>> buscarHorasDisponibles(@RequestParam String fecha) {
-        LocalDate fechaLocalDate = LocalDate.parse(fecha, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        GenericResponse<List<HorasCitas>> response = citasService.buscarHorasDisponibles(fechaLocalDate);
+        GenericResponse<List<HorasCitas>> response = citasService.buscarHorasDisponibles(fecha);
         return ResponseEntity.ok(response);
     }
 
@@ -65,4 +61,11 @@ public class CitasController {
         return ResponseEntity.ok(response);
     }
 
+    @GetMapping("/obtenerPorFechaYEspecialidad")
+    public ResponseEntity<GenericResponse<List<Citas>>> obtenerCitasPorFechaYEspecialidad(
+            @RequestParam String fecha,
+            @RequestParam String especialidad) {
+        GenericResponse<List<Citas>> response = citasService.obtenerCitasPorFechaYEspecialidad(fecha, especialidad);
+        return ResponseEntity.ok(response);
+    }
 }

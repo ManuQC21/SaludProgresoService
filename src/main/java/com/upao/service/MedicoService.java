@@ -8,6 +8,8 @@ import com.upao.repository.UsuarioRepository;
 import com.upao.utils.GenericResponse;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
+import java.util.List;
+
 import static com.upao.utils.Global.*;
 import static com.upao.utils.Global.RPTA_OK;
 
@@ -62,5 +64,9 @@ public class MedicoService {
     public GenericResponse<Iterable<Medico>> listarMedicos() {
         Iterable<Medico> medicos = medicoRepository.findAll();
         return new GenericResponse<>(TIPO_DATA, RPTA_OK, "Lista de médicos obtenida correctamente", medicos);
+    }
+    public GenericResponse<List<String>> listarEspecialidades() {
+        List<String> especialidades = medicoRepository.findDistinctEspecialidades();
+        return new GenericResponse<>("List<String>", 1, "Fechas disponibles encontradas", especialidades);
     }
 }
