@@ -17,11 +17,6 @@ public class Citas {
     @ManyToOne
     @JoinColumn(name = "fecha_cita_id")
     private FechasCitas fechaCita;
-
-    @ManyToOne
-    private DisponibilidadMedico horarioMedico;
-
-
     @ManyToOne
     @JoinColumn(name = "hora_cita_id")
     private HorasCitas horaCita;
