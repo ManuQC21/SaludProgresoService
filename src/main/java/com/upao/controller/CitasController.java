@@ -97,4 +97,9 @@ public class CitasController {
         }
     }
 
+    @GetMapping("/{citaId}/especialidad")
+    public ResponseEntity<GenericResponse<String>> obtenerEspecialidadPorId(@PathVariable Long citaId) {
+        GenericResponse<String> response = citasService.buscarEspecialidadPorId(citaId);
+        return ResponseEntity.ok(response);
+    }
 }

@@ -161,6 +161,13 @@ public class CitasService {
             return new GenericResponse<>("FechasCitas", -1, "Error al guardar en base de datos: " + e.getMessage(), null);
         }
     }
-
+    public GenericResponse<String> buscarEspecialidadPorId(Long citaId) {
+        String especialidad = citasRepository.findEspecialidadByCitaId(citaId);
+        if (especialidad != null) {
+            return new GenericResponse<>("Especialidad", 1, "Especialidad encontrada", especialidad);
+        } else {
+            return new GenericResponse<>("Especialidad", -1, "Especialidad no encontrada", null);
+        }
+    }
 
 }
