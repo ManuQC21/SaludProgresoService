@@ -72,7 +72,7 @@ public class CitasController {
         return ResponseEntity.ok(response);
     }
     //en general:
-    @GetMapping()
+    @GetMapping("/citasdisponibles")
     public ResponseEntity<GenericResponse<List<DisponibilidadMedico>>> obtenerCitasDisponibles(
             @RequestParam String fecha) {
         GenericResponse<List<DisponibilidadMedico>> response = citasService.obtenercitasdisponibles(fecha);
