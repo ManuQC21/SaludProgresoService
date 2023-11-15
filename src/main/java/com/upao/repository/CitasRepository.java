@@ -17,6 +17,8 @@ public interface CitasRepository extends JpaRepository<Citas, Long> {
 
     @Query("SELECT d FROM DisponibilidadMedico d WHERE d.fechaCita.fecha = :fecha AND d.medico.especialidad = :especialidad AND d.horaCita.disponible = true")
     List<DisponibilidadMedico> findByFechaAndEspecialidad(@Param("fecha") String fecha, @Param("especialidad") String especialidad);
+    @Query("SELECT d FROM DisponibilidadMedico d WHERE d.fechaCita.fecha = :fecha AND d.horaCita.disponible = true")
+    List<DisponibilidadMedico> findByFecha(@Param("fecha") String fecha);
 
 }
 

@@ -141,7 +141,11 @@ public class CitasService {
         List<DisponibilidadMedico> disponibilidad = citasRepository.findByFechaAndEspecialidad(fecha, especialidad);
         return new GenericResponse<>("List<DisponibilidadMedico>", 1, "Doctores disponibles encontrados", disponibilidad);
     }
-
+    // en general
+    public GenericResponse<List<DisponibilidadMedico>> obtenercitasdisponibles(String fecha) {
+        List<DisponibilidadMedico> disponibilidad = citasRepository.findByFecha(fecha);
+        return new GenericResponse<>("List<DisponibilidadMedico>", 1, "Doctores disponibles encontrados", disponibilidad);
+    }
     public GenericResponse<FechasCitas> agregarFechaConHoras(FechasCitas fechasCitas) {
         if(fechasCitas == null || fechasCitas.getFecha() == null || fechasCitas.getHorasCitas() == null) {
             // Log y manejo de error si la entrada es nula o incompleta

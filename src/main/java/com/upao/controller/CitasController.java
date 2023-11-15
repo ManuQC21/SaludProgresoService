@@ -71,7 +71,13 @@ public class CitasController {
         GenericResponse<List<DisponibilidadMedico>> response = citasService.obtenerDoctoresDisponiblesPorFechaYEspecialidad(fecha, especialidad);
         return ResponseEntity.ok(response);
     }
-
+    //en general:
+    @GetMapping()
+    public ResponseEntity<GenericResponse<List<DisponibilidadMedico>>> obtenerCitasDisponibles(
+            @RequestParam String fecha) {
+        GenericResponse<List<DisponibilidadMedico>> response = citasService.obtenercitasdisponibles(fecha);
+        return ResponseEntity.ok(response);
+    }
     @PostMapping("/agregarFechaConHoras")
     public ResponseEntity<GenericResponse<FechasCitas>> agregarFechaConHoras(@RequestBody FechasCitas fechasCitas) {
         // Convertir DTO a Entidad si estás utilizando un DTO
