@@ -21,8 +21,6 @@ public class HorasCitas {
     @JsonIgnore
     private FechasCitas fechaCita;
 
-    public HorasCitas() {
-    }
 
     public HorasCitas(Long id, String hora, Boolean disponible, FechasCitas fechaCita) {
         this.id = id;
@@ -31,7 +29,9 @@ public class HorasCitas {
         this.fechaCita = fechaCita;
     }
 
-// Getters y setters
+    public HorasCitas() {
+
+    }
 
     public Long getId() {
         return id;

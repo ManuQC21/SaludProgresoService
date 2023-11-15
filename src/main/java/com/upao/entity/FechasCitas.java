@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "fechas_citas")
@@ -18,15 +19,16 @@ public class FechasCitas {
     private String fecha;    // Fecha de la cita
 
     @OneToMany(mappedBy = "fechaCita", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnore
     private List<HorasCitas> horasCitas;     // Lista de horas de citas asociadas a esta fecha
 
-    public FechasCitas() {
-    }
-
-    public FechasCitas(String fecha, List<HorasCitas> horasCitas) {
+    public FechasCitas(Long id, String fecha, List<HorasCitas> horasCitas) {
+        this.id = id;
         this.fecha = fecha;
         this.horasCitas = horasCitas;
+    }
+
+    public FechasCitas() {
+
     }
 
     public Long getId() {

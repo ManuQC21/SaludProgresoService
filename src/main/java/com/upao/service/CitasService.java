@@ -20,6 +20,8 @@ public class CitasService {
     @Autowired
     private HorasCitasRepository horasCitasRepository;
 
+    private DisponibilidadMedicoRepository disponibilidadMedicoRepository;
+
     // 1. Guardar Cita
     @Transactional
     public GenericResponse<String> guardarCita(Citas nuevaCita) {
@@ -134,8 +136,27 @@ public class CitasService {
         //Imprime todas las citas que hay en la base de datos.
         return new GenericResponse<>("List<Citas>", 1, "Todas las citas encontradas", todasLasCitas);
     }
-    public GenericResponse<List<Citas>> obtenerCitasPorFechaYEspecialidad(String fecha, String especialidad) {
-        List<Citas> citas = citasRepository.findByFechaAndEspecialidad(fecha, especialidad);
-        return new GenericResponse<>("List<Citas>", 1, "Citas encontradas", citas);
+
+    public GenericResponse<List<DisponibilidadMedico>> obtenerDoctoresDisponiblesPorFechaYEspecialidad(String fecha, String especialidad) {
+        List<DisponibilidadMedico> disponibilidad = citasRepository.findByFechaAndEspecialidad(fecha, especialidad);
+        return new GenericResponse<>("List<DisponibilidadMedico>", 1, "Doctores disponibles encontrados", disponibilidad);
     }
+
+    public GenericResponse<FechasCitas> agregarFechaConHoras(FechasCitas fechasCitas) {
+        if(fechasCitas == null || fechasCitas.getFecha() == null || fechasCitas.getHorasCitas() == null) {
+            // Log y manejo de error si la entrada es nula o incompleta
+            return new GenericResponse<>("FechasCitas", -1, "Datos de entrada inválidos", null);
+        }
+
+        try {
+            fechasCitas.getHorasCitas().forEach(horaCita -> horaCita.setFechaCita(fechasCitas));
+            FechasCitas guardada = fechasCitaRepository.save(fechasCitas);
+            return new GenericResponse<>("FechasCitas", 1, "Fecha y horas de citas agregadas", guardada);
+        } catch (Exception e) {
+            // Log y manejo de excepciones durante el guardado
+            return new GenericResponse<>("FechasCitas", -1, "Error al guardar en base de datos: " + e.getMessage(), null);
+        }
+    }
+
+
 }
