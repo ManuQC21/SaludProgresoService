@@ -1,7 +1,7 @@
 package com.upao.controller;
 
 import com.upao.entity.Foto;
-import com.upao.service.DocumentoAlmacenadoService;
+import com.upao.service.FotoService;
 import com.upao.utils.GenericResponse;
 import org.springframework.core.io.Resource;
 import org.springframework.http.ResponseEntity;
@@ -12,9 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 @RequestMapping("api/documento-almacenado")
 public class FotoController {
-    private DocumentoAlmacenadoService service;
+    private FotoService service;
 
-    public FotoController(DocumentoAlmacenadoService service) {
+    public FotoController(FotoService service) {
         this.service = service;
     }
 
