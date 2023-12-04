@@ -9,7 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -47,8 +46,8 @@ public class CitasController {
     }
 
     @GetMapping("/horasDisponibles")
-    public ResponseEntity<GenericResponse<List<HorasCitas>>> buscarHorasDisponibles(@RequestParam String fecha) {
-        GenericResponse<List<HorasCitas>> response = citasService.buscarHorasDisponibles(fecha);
+    public ResponseEntity<GenericResponse<List<Horario_Cita>>> buscarHorasDisponibles(@RequestParam String fecha) {
+        GenericResponse<List<Horario_Cita>> response = citasService.buscarHorasDisponibles(fecha);
         return ResponseEntity.ok(response);
     }
 
@@ -65,21 +64,21 @@ public class CitasController {
     }
 
     @GetMapping("/obtenerPorFechaYEspecialidad")
-    public ResponseEntity<GenericResponse<List<DisponibilidadMedico>>> obtenerDoctoresDisponiblesPorFechaYEspecialidad(
+    public ResponseEntity<GenericResponse<List<Agenda_Medica>>> obtenerDoctoresDisponiblesPorFechaYEspecialidad(
             @RequestParam String fecha,
             @RequestParam String especialidad) {
-        GenericResponse<List<DisponibilidadMedico>> response = citasService.obtenerDoctoresDisponiblesPorFechaYEspecialidad(fecha, especialidad);
+        GenericResponse<List<Agenda_Medica>> response = citasService.obtenerDoctoresDisponiblesPorFechaYEspecialidad(fecha, especialidad);
         return ResponseEntity.ok(response);
     }
     //en general:
     @GetMapping("/citasdisponibles")
-    public ResponseEntity<GenericResponse<List<DisponibilidadMedico>>> obtenerCitasDisponibles(
+    public ResponseEntity<GenericResponse<List<Agenda_Medica>>> obtenerCitasDisponibles(
             @RequestParam String fecha) {
-        GenericResponse<List<DisponibilidadMedico>> response = citasService.obtenercitasdisponibles(fecha);
+        GenericResponse<List<Agenda_Medica>> response = citasService.obtenercitasdisponibles(fecha);
         return ResponseEntity.ok(response);
     }
     @PostMapping("/agregarFechaConHoras")
-    public ResponseEntity<GenericResponse<FechasCitas>> agregarFechaConHoras(@RequestBody FechasCitas fechasCitas) {
+    public ResponseEntity<GenericResponse<Programacion_Cita>> agregarFechaConHoras(@RequestBody Programacion_Cita fechasCitas) {
         // Convertir DTO a Entidad si estás utilizando un DTO
 
         System.out.println("Fecha: " + fechasCitas.getFecha());
@@ -88,7 +87,7 @@ public class CitasController {
         System.out.println("Recibido en agregarFechaConHoras: " + fechasCitas);
 
         try {
-            GenericResponse<FechasCitas> response = citasService.agregarFechaConHoras(fechasCitas);
+            GenericResponse<Programacion_Cita> response = citasService.agregarFechaConHoras(fechasCitas);
             return ResponseEntity.ok(response);
         } catch (Exception e) {
             // Log del error

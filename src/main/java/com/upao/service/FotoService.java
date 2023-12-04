@@ -1,7 +1,7 @@
 package com.upao.service;
 
-import com.upao.entity.DocumentoAlmacenado;
-import com.upao.repository.DocumentoAlmacenadoRepository;
+import com.upao.entity.Foto;
+import com.upao.repository.FotoRepository;
 import com.upao.utils.GenericResponse;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -17,17 +17,17 @@ import java.util.HashMap;
 import static com.upao.utils.Global.*;
 @Service
 @Transactional
-public class DocumentoAlmacenadoService {
-    private DocumentoAlmacenadoRepository repo;
+public class FotoService {
+    private FotoRepository repo;
     private FileStorageService storageService;
 
-    public DocumentoAlmacenadoService(DocumentoAlmacenadoRepository repo, FileStorageService storageService) {
+    public FotoService(FotoRepository repo, FileStorageService storageService) {
         this.repo = repo;
         this.storageService = storageService;
     }
 
-    public GenericResponse<Iterable<DocumentoAlmacenado>> list() {
-        return new GenericResponse<Iterable<DocumentoAlmacenado>>(TIPO_RESULT, RPTA_OK, OPERACION_CORRECTA, repo.list());
+    public GenericResponse<Iterable<Foto>> list() {
+        return new GenericResponse<Iterable<Foto>>(TIPO_RESULT, RPTA_OK, OPERACION_CORRECTA, repo.list());
     }
 
 
@@ -36,8 +36,8 @@ public class DocumentoAlmacenadoService {
     }
 
 
-    public GenericResponse save(DocumentoAlmacenado obj) {
-        String fileName = (repo.findById(obj.getId())).orElse(new DocumentoAlmacenado()).getFileName();
+    public GenericResponse save(Foto obj) {
+        String fileName = (repo.findById(obj.getId())).orElse(new Foto()).getFileName();
 
         String originalFilename = obj.getFile().getOriginalFilename();
         String extension = originalFilename.substring(originalFilename.lastIndexOf("."));
@@ -71,7 +71,7 @@ public class DocumentoAlmacenadoService {
     }
 
     public ResponseEntity<Resource> downloadByFileName(String fileName, HttpServletRequest request) {
-        DocumentoAlmacenado doc = repo.findByFileName(fileName).orElse(new DocumentoAlmacenado());
+        Foto doc = repo.findByFileName(fileName).orElse(new Foto());
         return download(doc.getCompleteFileName(), request);
     }
 
@@ -80,7 +80,7 @@ public class DocumentoAlmacenadoService {
         return null;
     }
 
-    public HashMap<String, Object> validate(DocumentoAlmacenado obj) {
+    public HashMap<String, Object> validate(Foto obj) {
         return null;
     }
 }

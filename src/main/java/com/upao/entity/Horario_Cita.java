@@ -3,33 +3,41 @@ package com.upao.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 @Entity
 @Table(name = "horas_citas")
-public class HorasCitas {
+public class Horario_Cita {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "hora")
-    private String hora;  // Ejemplo: "08:00", "09:00", etc. Usar 0 en numeros menores a 12.
+    @NotBlank(message = "La hora no puede estar vacía.")
+    @Pattern(regexp = "^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$", message = "Formato de hora inválido.")
+    private String hora;  // Ejemplo: "08:00", "09:00", etc.
 
     @Column(name = "disponible")
+    @NotNull(message = "Debe indicar si la hora está disponible.")
     private Boolean disponible;
+
     @ManyToOne
     @JoinColumn(name = "fecha_cita_id")
     @JsonIgnore
-    private FechasCitas fechaCita;
+    @NotNull(message = "Debe estar asociada a una fecha de cita.")
+    private Programacion_Cita fechaCita;
 
 
-    public HorasCitas(Long id, String hora, Boolean disponible, FechasCitas fechaCita) {
+    public Horario_Cita(Long id, String hora, Boolean disponible, Programacion_Cita fechaCita) {
         this.id = id;
         this.hora = hora;
         this.disponible = disponible;
         this.fechaCita = fechaCita;
     }
 
-    public HorasCitas() {
+    public Horario_Cita() {
 
     }
 
@@ -57,11 +65,11 @@ public class HorasCitas {
         this.disponible = disponible;
     }
 
-    public FechasCitas getFechaCita() {
+    public Programacion_Cita getFechaCita() {
         return fechaCita;
     }
 
-    public void setFechaCita(FechasCitas fechaCita) {
+    public void setFechaCita(Programacion_Cita fechaCita) {
         this.fechaCita = fechaCita;
     }
 }

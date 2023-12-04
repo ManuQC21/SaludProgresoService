@@ -1,6 +1,6 @@
 package com.upao.controller;
 
-import com.upao.entity.DocumentoAlmacenado;
+import com.upao.entity.Foto;
 import com.upao.service.DocumentoAlmacenadoService;
 import com.upao.utils.GenericResponse;
 import org.springframework.core.io.Resource;
@@ -11,10 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 
 @RestController
 @RequestMapping("api/documento-almacenado")
-public class DocumentoAlmacenadoController {
+public class FotoController {
     private DocumentoAlmacenadoService service;
 
-    public DocumentoAlmacenadoController(DocumentoAlmacenadoService service) {
+    public FotoController(DocumentoAlmacenadoService service) {
         this.service = service;
     }
 
@@ -34,11 +34,11 @@ public class DocumentoAlmacenadoController {
     }
 
     @PostMapping
-    public GenericResponse save(@ModelAttribute DocumentoAlmacenado obj) {
+    public GenericResponse save(@ModelAttribute Foto obj) {
         return service.save(obj);
     }
 
-    public GenericResponse update(Long aLong, DocumentoAlmacenado obj) {
+    public GenericResponse update(Long aLong, Foto obj) {
         return null;
     }
 

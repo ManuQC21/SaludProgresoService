@@ -1,6 +1,5 @@
 package com.upao.repository;
 
-import com.upao.entity.DocumentoAlmacenado;
 import com.upao.entity.Usuario;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;

@@ -1,7 +1,5 @@
 package com.upao.service;
 
-import com.upao.entity.DocumentoAlmacenado;
-import com.upao.entity.Paciente;
 import com.upao.entity.Usuario;
 import com.upao.repository.PacienteRepository;
 import com.upao.repository.UsuarioRepository;

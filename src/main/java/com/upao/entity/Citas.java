@@ -1,6 +1,7 @@
 package com.upao.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "citas")
@@ -8,21 +9,29 @@ public class Citas {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @ManyToOne
     @JoinColumn(name = "paciente_id")
+    @NotNull(message = "El paciente es obligatorio.")
     private Paciente paciente;
+
     @ManyToOne
     @JoinColumn(name = "medico_id")
+    @NotNull(message = "El médico es obligatorio.")
     private Medico medico;
+
     @ManyToOne
     @JoinColumn(name = "fecha_cita_id")
-    private FechasCitas fechaCita;
+    @NotNull(message = "La fecha de la cita es obligatoria.")
+    private Programacion_Cita fechaCita;
+
     @ManyToOne
     @JoinColumn(name = "hora_cita_id")
-    private HorasCitas horaCita;
+    @NotNull(message = "La hora de la cita es obligatoria.")
+    private Horario_Cita horaCita;
     public Citas() {
     }
-    public Citas(Long id, Paciente paciente, Medico medico, FechasCitas fechaCita, HorasCitas horaCita) {
+    public Citas(Long id, Paciente paciente, Medico medico, Programacion_Cita fechaCita, Horario_Cita horaCita) {
         this.id = id;
         this.paciente = paciente;
         this.medico = medico;
@@ -54,19 +63,19 @@ public class Citas {
         this.medico = medico;
     }
 
-    public FechasCitas getFechaCita() {
+    public Programacion_Cita getFechaCita() {
         return fechaCita;
     }
 
-    public void setFechaCita(FechasCitas fechaCita) {
+    public void setFechaCita(Programacion_Cita fechaCita) {
         this.fechaCita = fechaCita;
     }
 
-    public HorasCitas getHoraCita() {
+    public Horario_Cita getHoraCita() {
         return horaCita;
     }
 
-    public void setHoraCita(HorasCitas horaCita) {
+    public void setHoraCita(Horario_Cita horaCita) {
         this.horaCita = horaCita;
     }
 }

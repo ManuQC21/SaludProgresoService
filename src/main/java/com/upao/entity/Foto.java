@@ -6,7 +6,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.persistence.*;
 
 @Entity
-public class DocumentoAlmacenado {
+public class Foto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -28,7 +28,7 @@ public class DocumentoAlmacenado {
     @Transient
     private String urlFile;
 
-    public DocumentoAlmacenado() {
+    public Foto() {
         id = 0;
         nombre = "";
         fileName = "";

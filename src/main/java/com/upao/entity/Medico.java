@@ -1,6 +1,9 @@
 package com.upao.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Medico {
@@ -9,12 +12,18 @@ public class Medico {
     private int id;
 
     @Column(length = 500)
+    @NotBlank(message = "El nombre del médico es obligatorio.")
+    @Size(max = 500, message = "El nombre del médico no puede exceder los 500 caracteres.")
     private String nombreMedico;
 
     @Column(length = 100)
+    @NotBlank(message = "La especialidad es obligatoria.")
+    @Size(max = 100, message = "La especialidad no puede exceder los 100 caracteres.")
     private String especialidad;
+
     @OneToOne
-    private DocumentoAlmacenado foto;
+    @NotNull(message = "La foto es obligatoria.")
+    private Foto foto;
 
     public int getId() {
         return id;
@@ -40,11 +49,11 @@ public class Medico {
         this.especialidad = especialidad;
     }
 
-    public DocumentoAlmacenado getFoto() {
+    public Foto getFoto() {
         return foto;
     }
 
-    public void setFoto(DocumentoAlmacenado foto) {
+    public void setFoto(Foto foto) {
         this.foto = foto;
     }
 }

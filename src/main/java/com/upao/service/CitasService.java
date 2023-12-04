@@ -15,28 +15,28 @@ public class CitasService {
     private CitasRepository citasRepository;
 
     @Autowired
-    private FechasCitaRepository fechasCitaRepository;
+    private ProgramacionCitaRepository fechasCitaRepository;
 
     @Autowired
-    private HorasCitasRepository horasCitasRepository;
+    private HorarioCitaRepository horasCitasRepository;
 
-    private DisponibilidadMedicoRepository disponibilidadMedicoRepository;
+    private Agenda_MedicaRepository disponibilidadMedicoRepository;
 
     // 1. Guardar Cita
     @Transactional
     public GenericResponse<String> guardarCita(Citas nuevaCita) {
         // Verificar si la fecha de la cita existe y está disponible
-        Optional<FechasCitas> fechaCitaOpt = fechasCitaRepository.findById(nuevaCita.getFechaCita().getId());
+        Optional<Programacion_Cita> fechaCitaOpt = fechasCitaRepository.findById(nuevaCita.getFechaCita().getId());
         if (!fechaCitaOpt.isPresent()) {
             return new GenericResponse<>("Cita", 0, "La fecha de la cita no existe o no está disponible", null);
         }
         // Verificar si la hora de la cita existe y está disponible
-        Optional<HorasCitas> horaCitaOpt = horasCitasRepository.findById(nuevaCita.getHoraCita().getId());
+        Optional<Horario_Cita> horaCitaOpt = horasCitasRepository.findById(nuevaCita.getHoraCita().getId());
         if (!horaCitaOpt.isPresent() || !horaCitaOpt.get().getDisponible()) {
             return new GenericResponse<>("Cita", 0, "La hora de la cita no existe o no está disponible", null);
         }
         // Actualizar la disponibilidad de la hora de cita a 'false'
-        HorasCitas horaCita = horaCitaOpt.get();
+        Horario_Cita horaCita = horaCitaOpt.get();
         horaCita.setDisponible(false);
         horasCitasRepository.save(horaCita);
         // Guardar la cita y obtener la cita guardada con su ID generado
@@ -60,14 +60,14 @@ public class CitasService {
         }
 
         // Buscar la nueva fecha en FechasCitas
-        Optional<FechasCitas> fechaCitaOpt = fechasCitaRepository.findByFecha(nuevaFecha);
+        Optional<Programacion_Cita> fechaCitaOpt = fechasCitaRepository.findByFecha(nuevaFecha);
         if (!fechaCitaOpt.isPresent()) {
             return new GenericResponse<>("Cita", 0, "La nueva fecha de cita no está disponible", null);
         }
-        FechasCitas fechaCita = fechaCitaOpt.get();
+        Programacion_Cita fechaCita = fechaCitaOpt.get();
 
         // Buscar la hora especificada en HorasCitas para la nueva fecha
-        Optional<HorasCitas> horaCitaOpt = horasCitasRepository.findHorasDisponiblesEnFecha(nuevaFecha).stream()
+        Optional<Horario_Cita> horaCitaOpt = horasCitasRepository.findHorasDisponiblesEnFecha(nuevaFecha).stream()
                 .filter(h -> h.getHora().equals(nuevaHora))
                 .findFirst();
         if (!horaCitaOpt.isPresent()) {
@@ -75,7 +75,7 @@ public class CitasService {
         }
 
         // Actualizar la disponibilidad de la hora de cita anterior a 'true'
-        HorasCitas horaCitaAnterior = citaExistente.get().getHoraCita();
+        Horario_Cita horaCitaAnterior = citaExistente.get().getHoraCita();
         horaCitaAnterior.setDisponible(true);
         horasCitasRepository.save(horaCitaAnterior);
 
@@ -85,7 +85,7 @@ public class CitasService {
         cita.setHoraCita(horaCitaOpt.get());
 
         // Establecer la nueva hora como no disponible
-        HorasCitas horaCitaNueva = horaCitaOpt.get();
+        Horario_Cita horaCitaNueva = horaCitaOpt.get();
         horaCitaNueva.setDisponible(false);
         horasCitasRepository.save(horaCitaNueva);
 
@@ -106,7 +106,7 @@ public class CitasService {
         }
 
         // Actualizar la disponibilidad de la hora si es necesario
-        HorasCitas horaCita = cita.get().getHoraCita();
+        Horario_Cita horaCita = cita.get().getHoraCita();
         horaCita.setDisponible(true);
         horasCitasRepository.save(horaCita);
 
@@ -117,9 +117,9 @@ public class CitasService {
 
 
     // 5. Buscar Horas Disponibles en una Fecha
-    public GenericResponse<List<HorasCitas>> buscarHorasDisponibles(String fecha) {
+    public GenericResponse<List<Horario_Cita>> buscarHorasDisponibles(String fecha) {
         //Lógica para buscar horas disponibles en una fecha específica
-        List<HorasCitas> horasDisponibles = horasCitasRepository.findHorasDisponiblesEnFecha(fecha);
+        List<Horario_Cita> horasDisponibles = horasCitasRepository.findHorasDisponiblesEnFecha(fecha);
         // Imprime las Horas disponibles de la fecha
         return new GenericResponse<>("List<HorasCitas>", 1, "Horas disponibles encontradas", horasDisponibles);
     }
@@ -137,16 +137,16 @@ public class CitasService {
         return new GenericResponse<>("List<Citas>", 1, "Todas las citas encontradas", todasLasCitas);
     }
 
-    public GenericResponse<List<DisponibilidadMedico>> obtenerDoctoresDisponiblesPorFechaYEspecialidad(String fecha, String especialidad) {
-        List<DisponibilidadMedico> disponibilidad = citasRepository.findByFechaAndEspecialidad(fecha, especialidad);
+    public GenericResponse<List<Agenda_Medica>> obtenerDoctoresDisponiblesPorFechaYEspecialidad(String fecha, String especialidad) {
+        List<Agenda_Medica> disponibilidad = citasRepository.findByFechaAndEspecialidad(fecha, especialidad);
         return new GenericResponse<>("List<DisponibilidadMedico>", 1, "Doctores disponibles encontrados", disponibilidad);
     }
     // en general
-    public GenericResponse<List<DisponibilidadMedico>> obtenercitasdisponibles(String fecha) {
-        List<DisponibilidadMedico> disponibilidad = citasRepository.findByFecha(fecha);
+    public GenericResponse<List<Agenda_Medica>> obtenercitasdisponibles(String fecha) {
+        List<Agenda_Medica> disponibilidad = citasRepository.findByFecha(fecha);
         return new GenericResponse<>("List<DisponibilidadMedico>", 1, "Doctores disponibles encontrados", disponibilidad);
     }
-    public GenericResponse<FechasCitas> agregarFechaConHoras(FechasCitas fechasCitas) {
+    public GenericResponse<Programacion_Cita> agregarFechaConHoras(Programacion_Cita fechasCitas) {
         if(fechasCitas == null || fechasCitas.getFecha() == null || fechasCitas.getHorasCitas() == null) {
             // Log y manejo de error si la entrada es nula o incompleta
             return new GenericResponse<>("FechasCitas", -1, "Datos de entrada inválidos", null);
@@ -154,7 +154,7 @@ public class CitasService {
 
         try {
             fechasCitas.getHorasCitas().forEach(horaCita -> horaCita.setFechaCita(fechasCitas));
-            FechasCitas guardada = fechasCitaRepository.save(fechasCitas);
+            Programacion_Cita guardada = fechasCitaRepository.save(fechasCitas);
             return new GenericResponse<>("FechasCitas", 1, "Fecha y horas de citas agregadas", guardada);
         } catch (Exception e) {
             // Log y manejo de excepciones durante el guardado
