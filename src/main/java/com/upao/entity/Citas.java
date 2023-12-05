@@ -12,22 +12,18 @@ public class Citas {
 
     @ManyToOne
     @JoinColumn(name = "paciente_id")
-    @NotNull(message = "El paciente es obligatorio.")
     private Paciente paciente;
 
     @ManyToOne
     @JoinColumn(name = "medico_id")
-    @NotNull(message = "El médico es obligatorio.")
     private Medico medico;
 
     @ManyToOne
     @JoinColumn(name = "fecha_cita_id")
-    @NotNull(message = "La fecha de la cita es obligatoria.")
     private Programacion_Cita fechaCita;
 
     @ManyToOne
     @JoinColumn(name = "hora_cita_id")
-    @NotNull(message = "La hora de la cita es obligatoria.")
     private Horario_Cita horaCita;
     public Citas() {
     }

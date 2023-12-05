@@ -15,18 +15,15 @@ public class Horario_Cita {
     private Long id;
 
     @Column(name = "hora")
-    @NotBlank(message = "La hora no puede estar vacía.")
     @Pattern(regexp = "^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$", message = "Formato de hora inválido.")
     private String hora;  // Ejemplo: "08:00", "09:00", etc.
 
     @Column(name = "disponible")
-    @NotNull(message = "Debe indicar si la hora está disponible.")
     private Boolean disponible;
 
     @ManyToOne
     @JoinColumn(name = "fecha_cita_id")
     @JsonIgnore
-    @NotNull(message = "Debe estar asociada a una fecha de cita.")
     private Programacion_Cita fechaCita;
 
 

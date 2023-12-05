@@ -10,14 +10,10 @@ public class Programacion_Cita {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @Column(name = "fecha", length = 100)
-    @NotBlank(message = "La fecha de la cita es obligatoria.")
     private String fecha; // Fecha de la cita
-
     @OneToMany(mappedBy = "fechaCita", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Horario_Cita> horasCitas; // Lista de horas de citas asociadas a esta fecha
-
+    private List<Horario_Cita> horasCitas;
 
     public Programacion_Cita(Long id, String fecha, List<Horario_Cita> horasCitas) {
         this.id = id;

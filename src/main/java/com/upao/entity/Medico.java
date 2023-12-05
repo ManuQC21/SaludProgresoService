@@ -12,17 +12,14 @@ public class Medico {
     private int id;
 
     @Column(length = 500)
-    @NotBlank(message = "El nombre del médico es obligatorio.")
     @Size(max = 500, message = "El nombre del médico no puede exceder los 500 caracteres.")
     private String nombreMedico;
 
     @Column(length = 100)
-    @NotBlank(message = "La especialidad es obligatoria.")
     @Size(max = 100, message = "La especialidad no puede exceder los 100 caracteres.")
     private String especialidad;
 
     @OneToOne
-    @NotNull(message = "La foto es obligatoria.")
     private Foto foto;
 
     public int getId() {

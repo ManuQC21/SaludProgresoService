@@ -21,5 +21,6 @@ public interface CitasRepository extends JpaRepository<Citas, Long> {
     List<Agenda_Medica> findByFecha(@Param("fecha") String fecha);
     @Query("SELECT c.medico.especialidad FROM Citas c WHERE c.id = :citaId")
     String findEspecialidadByCitaId(Long citaId);
+
 }
 

@@ -6,8 +6,13 @@ import com.upao.utils.GenericResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+
 @Service
 public class CitasService {
 
@@ -168,6 +173,23 @@ public class CitasService {
         } else {
             return new GenericResponse<>("Especialidad", -1, "Especialidad no encontrada", null);
         }
+    }
+    public GenericResponse<List<Citas>> findCitasVigentes() {
+        List<Citas> todasLasCitas = citasRepository.findAll();
+        List<Citas> citasVigentes = todasLasCitas.stream()
+                .filter(cita -> LocalDate.parse(cita.getFechaCita().getFecha(), DateTimeFormatter.ofPattern("dd-MM-yyyy"))
+                        .isAfter(LocalDate.now()))
+                .collect(Collectors.toList());
+        return new GenericResponse<>("List<Citas>", 1, "Citas vigentes encontradas", citasVigentes);
+    }
+
+    public GenericResponse<List<Citas>> findCitasVencidas() {
+        List<Citas> todasLasCitas = citasRepository.findAll();
+        List<Citas> citasVencidas = todasLasCitas.stream()
+                .filter(cita -> LocalDate.parse(cita.getFechaCita().getFecha(), DateTimeFormatter.ofPattern("dd-MM-yyyy"))
+                        .isBefore(LocalDate.now()))
+                .collect(Collectors.toList());
+        return new GenericResponse<>("List<Citas>", 1, "Citas vencidas encontradas", citasVencidas);
     }
 
 }

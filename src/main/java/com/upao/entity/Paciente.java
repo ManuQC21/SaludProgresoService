@@ -12,66 +12,37 @@ public class Paciente {
     private int id;
 
     @Column(length = 100)
-    @NotBlank(message = "Los nombres son obligatorios.")
     @Size(max = 100, message = "Los nombres no pueden exceder los 100 caracteres.")
     private String nombres;
-
     @Column(length = 100)
-    @NotBlank(message = "El apellido paterno es obligatorio.")
     @Size(max = 100, message = "El apellido paterno no puede exceder los 100 caracteres.")
     private String apellidoPaterno;
-
     @Column(length = 100)
-    @NotBlank(message = "El apellido materno es obligatorio.")
     @Size(max = 100, message = "El apellido materno no puede exceder los 100 caracteres.")
     private String apellidoMaterno;
-
     @Column(length = 100)
-    @NotBlank(message = "La fecha de nacimiento es obligatoria.")
     private String fechanacimiento;
-
     @Column(length = 20)
-    @NotBlank(message = "El tipo de documento es obligatorio.")
     private String tipoDoc;
-
     @Column(length = 8)
-    @NotBlank(message = "El número de documento es obligatorio.")
     private String numDoc;
-
     @Column(length = 100)
-    @NotBlank(message = "El departamento es obligatorio.")
     private String departamento;
-
     @Column(length = 100)
-    @NotBlank(message = "La provincia es obligatoria.")
     private String provincia;
-
     @Column(length = 100)
-    @NotBlank(message = "El distrito es obligatorio.")
     private String distrito;
-
     @Column(length = 100)
-    @NotBlank(message = "La dirección es obligatoria.")
     private String direccion;
-
     @Column(length = 100)
-    @NotBlank(message = "El género es obligatorio.")
     private String genero;
-
     @Column(length = 9)
-    @NotBlank(message = "El teléfono es obligatorio.")
     private String telefono;
-
     @Column(length = 100)
-    @NotBlank(message = "Las alergias son obligatorias.")
     private String alergias;
-
     @Column(length = 400)
-    @NotBlank(message = "La información adicional es obligatoria.")
     private String informacionadicional;
-
     @OneToOne
-    @NotNull(message = "La foto es obligatoria.")
     private Foto foto;
 
     public int getId() {

@@ -101,4 +101,16 @@ public class CitasController {
         GenericResponse<String> response = citasService.buscarEspecialidadPorId(citaId);
         return ResponseEntity.ok(response);
     }
+
+    @GetMapping("/vigentes")
+    public ResponseEntity<GenericResponse<List<Citas>>> buscarCitasVigentes() {
+        GenericResponse<List<Citas>> response = citasService.findCitasVigentes();
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/vencidas")
+    public ResponseEntity<GenericResponse<List<Citas>>> buscarCitasVencidas() {
+        GenericResponse<List<Citas>> response = citasService.findCitasVencidas();
+        return ResponseEntity.ok(response);
+    }
 }
