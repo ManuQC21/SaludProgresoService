@@ -113,4 +113,15 @@ public class CitasController {
         GenericResponse<List<Citas>> response = citasService.findCitasVencidas();
         return ResponseEntity.ok(response);
     }
+    @PostMapping("/activarDesactivarRecordatorio")
+    public ResponseEntity<GenericResponse<Citas>> activarDesactivarRecordatorio(@RequestParam Long citaId, @RequestParam boolean activar) {
+        GenericResponse<Citas> response = citasService.activarDesactivarRecordatorio(citaId, activar);
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/conRecordatorio/{pacienteId}")
+    public ResponseEntity<GenericResponse<List<Citas>>> obtenerCitasConRecordatorio(@PathVariable Integer pacienteId) {
+        GenericResponse<List<Citas>> response = citasService.obtenerCitasConRecordatorio(pacienteId);
+        return ResponseEntity.ok(response);
+    }
 }

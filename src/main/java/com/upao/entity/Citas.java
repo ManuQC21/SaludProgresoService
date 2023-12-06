@@ -25,14 +25,19 @@ public class Citas {
     @ManyToOne
     @JoinColumn(name = "hora_cita_id")
     private Horario_Cita horaCita;
+    @Column(name = "recordatorio")
+    private Boolean recordatorio;
+
     public Citas() {
     }
-    public Citas(Long id, Paciente paciente, Medico medico, Programacion_Cita fechaCita, Horario_Cita horaCita) {
+
+    public Citas(Long id, Paciente paciente, Medico medico, Programacion_Cita fechaCita, Horario_Cita horaCita, Boolean recordatorio) {
         this.id = id;
         this.paciente = paciente;
         this.medico = medico;
         this.fechaCita = fechaCita;
         this.horaCita = horaCita;
+        this.recordatorio = recordatorio;
     }
 
     public Long getId() {
@@ -73,5 +78,13 @@ public class Citas {
 
     public void setHoraCita(Horario_Cita horaCita) {
         this.horaCita = horaCita;
+    }
+
+    public Boolean getRecordatorio() {
+        return recordatorio;
+    }
+
+    public void setRecordatorio(Boolean recordatorio) {
+        this.recordatorio = recordatorio;
     }
 }

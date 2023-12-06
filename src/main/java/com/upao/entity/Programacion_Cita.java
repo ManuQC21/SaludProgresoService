@@ -1,11 +1,14 @@
 package com.upao.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 @Entity
 @Table(name = "fechas_citas")
+@JsonIgnoreProperties({"horasCitas"}) // Ignora la propiedad horasCitas al serializar
 public class Programacion_Cita {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -3,6 +3,7 @@ package com.upao.service;
 import com.upao.entity.*;
 import com.upao.repository.*;
 import com.upao.utils.GenericResponse;
+import com.upao.utils.Global;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -191,5 +192,24 @@ public class CitasService {
                 .collect(Collectors.toList());
         return new GenericResponse<>("List<Citas>", 1, "Citas vencidas encontradas", citasVencidas);
     }
+    public GenericResponse<Citas> activarDesactivarRecordatorio(Long citaId, boolean activar) {
+        Optional<Citas> citaOpt = citasRepository.findById(citaId);
+        if (!citaOpt.isPresent()) {
+            return new GenericResponse<>("Citas", -1, "Cita no encontrada", null);
+        }
 
+        Citas cita = citaOpt.get();
+        cita.setRecordatorio(activar);  // Asume que tienes un campo 'recordatorio' en tu entidad Citas
+        citasRepository.save(cita);
+
+        return new GenericResponse<>("Citas", 1, activar ? "Recordatorio activado" : "Recordatorio desactivado", cita);
+    }
+
+    public GenericResponse<List<Citas>> obtenerCitasConRecordatorio(Integer pacienteId) {
+        List<Citas> citasConRecordatorio = citasRepository.findByPacienteIdAndRecordatorioTrue(pacienteId);
+        if (citasConRecordatorio.isEmpty()) {
+            return new GenericResponse<>("Citas", Global.RPTA_WARNING, "No hay citas con recordatorios activos", null);
+        }
+        return new GenericResponse<>("Citas", Global.RPTA_OK, "Citas con recordatorios encontradas", citasConRecordatorio);
+    }
 }
